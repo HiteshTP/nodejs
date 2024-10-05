@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: todo-deployment
   labels:
-    app: todo-app
+    app: todo-app 
 spec:
   replicas: 2
   selector:
@@ -19,4 +19,12 @@ spec:
         image: hiteshtp/todo-app
         ports:
         - containerPort: 80
+        volumeMounts:
+        - name: todo-pvc
+          mountPath: /home/ubuntu/data
+      volumes:
+      - name: todo-pvc
+        persistentVolumeClaim:
+          claimName: todo-pvc
+
 
